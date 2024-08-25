@@ -1,0 +1,40 @@
+.welcome-content {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--background-light);
+  border: 1px solid var(lightGray);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translateX(0);
+  opacity: 0;
+  animation: slideRight 2s ease-in-out forwards;
+
+  .intro-heading {
+    font-size: 1.5em;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 1em;
+    color: var(--dark-gray);
+    line-height: 1.5;
+    text-align: center;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}

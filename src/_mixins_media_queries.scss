@@ -1,0 +1,51 @@
+/* Landscape phones and down*/
+@mixin xs {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+
+/* Landscape phone to portrait tablet*/
+@mixin sm {
+  @media (min-width: 577px) and (max-width: 767px) {
+    @content;
+  }
+}
+/*Tout ce qui se trouve en dessous aura ses règles*/
+@mixin sm-lt {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+/*Portrait tablet to landscape and desktop*/
+@mixin md {
+  @media (min-width: 768px) and (max-width: 992px) {
+    @content;
+  }
+}
+/*Tout ce qui se trouve en dessous aura ses règles*/
+@mixin md-lt {
+  @media (max-width: 992px) {
+    @content;
+  }
+}
+
+/* Large desktop*/
+@mixin lg {
+  @media (min-width: 993px) and (max-width: 1200px) {
+    @content;
+  }
+}
+/*Tout ce qui se trouve en dessous aura ses règles*/
+@mixin lg-lt {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1201px) {
+    @content;
+  }
+}

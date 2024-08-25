@@ -1,0 +1,24 @@
+<nav
+  class="d-flex flex-row flex-justify-content-between flex-align-items-center"
+>
+  <a class="logo" [routerLink]="['']">
+    <img
+      ngSrc="assets/theatrum_logo.png"
+      width="70"
+      height="70"
+      alt="image theatrum icon"
+      priority
+    />
+  </a>
+  <ul class="d-flex">
+    <li>
+      <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+    </li>
+    <li>
+      <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
+    </li>
+    <li>
+      <a>About us</a>
+    </li>
+  </ul>
+</nav>

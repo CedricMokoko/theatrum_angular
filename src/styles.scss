@@ -242,6 +242,9 @@ body {
 .theatrum-container {
   min-height: calc(100vh - 82px); /* gli 85.8px est la height della NavBar*/
   margin-top: 82px;
+  background-color: var(--primary);
+  padding: 0 100px;
+
   // padding: 0px 0px;
 }
 

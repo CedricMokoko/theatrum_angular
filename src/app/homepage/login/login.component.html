@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label for="email">Email<span class="asterisco">*</span></label>
+      <input
+        formControlName="email"
+        type="text"
+        id="email"
+        name="email"
+        placeholder="exemple@gmail.com"
+      />
+      <div *ngIf="formErrors['email'].message">
+        <p class="errorText">
+          {{ formErrors["email"].message }}
+        </p>
+      </div>
+    </div>
+    <div>
+      <label for="codiceUtente"
+        >Codice utente<span class="asterisco">*</span></label
+      >
+      <input
+        formControlName="codiceUtente"
+        name="codiceUtente"
+        type="text"
+        id="codiceUtente"
+        placeholder="digitare codice utente"
+      />
+      <div *ngIf="formErrors['codiceUtente'].message">
+        <p class="errorText">
+          {{ formErrors["codiceUtente"].message }}
+        </p>
+      </div>
+    </div>
+    <div *ngIf="formErrors['form'].message">
+      <div class="separator"></div>
+      <p class="errorText">{{ formErrors["form"].message }}</p>
+    </div>
+    <button class="">Submit</button>
+  </form>
+</div>

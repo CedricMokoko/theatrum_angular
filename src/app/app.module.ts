@@ -1,10 +1,13 @@
+// Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgOptimizedImage } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { NgOptimizedImage } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './homepage/login/login.component';
 import { RegisterComponent } from './homepage/register/register.component';
@@ -18,8 +21,27 @@ import { PanierComponent } from './panier/panier.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomepageComponent, LoginComponent, RegisterComponent, WelcomeComponent, ContentContainerComponent, TeatriListComponent, SpettacoliListComponent, ReplicheListComponent, OrderFormComponent, PanierComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, NgOptimizedImage],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomepageComponent,
+    LoginComponent,
+    RegisterComponent,
+    WelcomeComponent,
+    ContentContainerComponent,
+    TeatriListComponent,
+    SpettacoliListComponent,
+    ReplicheListComponent,
+    OrderFormComponent,
+    PanierComponent,
+    NotFoundComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

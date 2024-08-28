@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
-import { Subscription } from 'rxjs';
+import { FormErrorHandlerService } from '../../shared/services/form-error-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -11,24 +11,6 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit {
   //Qui dicchiaro il mio formulario
   public form!: FormGroup;
-
-  constructor() {}
-
-  public subscription: Subscription = new Subscription();
-
-  ngOnInit(): void {
-    //Qui inizializzo il mio formulario
-    this.form = new FormGroup({
-      email: new FormControl('', [emailValidator(), Validators.required]),
-      codiceUtente: new FormControl('', [Validators.required]),
-    });
-
-    this.subscription.add(
-      this.form.statusChanges.subscribe(() => {
-        this.updateFormErrors();
-      })
-    );
-  }
 
   //Qui un oggetto per la mia gestione degli errori legati al mio formulario.
   public formErrors: {
@@ -40,14 +22,14 @@ export class LoginComponent implements OnInit {
     email: {
       message: '',
       validations: {
-        required: 'Ce champ est requis.',
-        emailInvalid: 'Rentrez une adresse email valide.',
+        required: "L'email è obbligatoria.",
+        emailInvalid: "Inserisci un'email valida.",
       },
     },
     codiceUtente: {
       message: '',
       validations: {
-        required: 'Ce champ est requis.',
+        required: 'Il codice utente obbligatorio.',
       },
     },
     form: {
@@ -56,34 +38,21 @@ export class LoginComponent implements OnInit {
     },
   };
 
-  // Funzione per il controllo dei miei campi se passano onblur dopo essere stati toccati
-  updateFormErrors(): void {
-    for (const campo in this.formErrors) {
-      this.formErrors[campo].message = '';
-    }
+  constructor() {}
 
-    // Check each control in the form
-    for (const campo in this.form.controls) {
-      const control = this.form.get(campo)!;
-
-      if (control.invalid && (control.touched || control.dirty)) {
-        const messages = this.formErrors[campo].validations;
-        for (const key in control.errors) {
-          if (messages[key]) {
-            this.formErrors[campo].message += messages[key] + ' ';
-          }
-        }
-        this.formErrors[campo].message = this.formErrors[campo].message.trim();
-      }
-    }
+  ngOnInit(): void {
+    //Qui inizializzo il mio formulario
+    this.form = new FormGroup({
+      email: new FormControl('', [emailValidator(), Validators.required]),
+      codiceUtente: new FormControl('', [Validators.required]),
+    });
   }
 
   public submit(): void {
     if (this.form.valid) {
       this.form.reset();
     } else {
-      this.formErrors['form'].message =
-        'Il form è vuoto o contiene errori. Per favore, controlla i campi evidenziati.';
+      this.formErrors['form'].message = 'Email e/o codice utente sbaglito/i.';
     }
   }
 }

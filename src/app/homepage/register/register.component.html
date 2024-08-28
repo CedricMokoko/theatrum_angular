@@ -1,1 +1,116 @@
-<p>register works!</p>
+<div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h3>Register</h3>
+    <!-- Nome -->
+    <div>
+      <label for="nome">Nome<span class="asterisco">*</span></label>
+      <input
+        formControlName="nome"
+        type="text"
+        id="nome"
+        name="nome"
+        placeholder="Inserisci il tuo nome"
+      />
+      <div *ngIf="formErrors['nome'].message">
+        <p class="errorText">
+          {{ formErrors["nome"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Cognome -->
+    <div>
+      <label for="cognome">Cognome<span class="asterisco">*</span></label>
+      <input
+        formControlName="cognome"
+        type="text"
+        id="cognome"
+        name="cognome"
+        placeholder="Inserisci il tuo cognome"
+      />
+      <div *ngIf="formErrors['cognome'].message">
+        <p class="errorText">
+          {{ formErrors["cognome"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email">Email<span class="asterisco">*</span></label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="exemple@gmail.com"
+      />
+      <div *ngIf="formErrors['email'].message">
+        <p class="errorText">
+          {{ formErrors["email"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Telefono -->
+    <div>
+      <label for="telefono">Telefono<span class="asterisco">*</span></label>
+      <input
+        formControlName="telefono"
+        type="text"
+        id="telefono"
+        name="telefono"
+        placeholder="2345678911"
+      />
+      <div *ngIf="formErrors['telefono'].message">
+        <p class="errorText">
+          {{ formErrors["telefono"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label for="password">Password<span class="asterisco">*</span></label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Digita password"
+      />
+      <div *ngIf="formErrors['password'].message">
+        <p class="errorText">
+          {{ formErrors["password"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Conferma Password -->
+    <div>
+      <label for="confirmPassword"
+        >Conferma Password<span class="asterisco">*</span></label
+      >
+      <input
+        formControlName="confirmPassword"
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Conferma password"
+      />
+      <div *ngIf="formErrors['confirmPassword'].message">
+        <p class="errorText">
+          {{ formErrors["confirmPassword"].message }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Errore generale del form -->
+    <div *ngIf="formErrors['form'].message">
+      <div class="separator"></div>
+      <p class="errorText">{{ formErrors["form"].message }}</p>
+    </div>
+
+    <button>Submit</button>
+  </form>
+</div>

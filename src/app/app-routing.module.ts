@@ -11,6 +11,7 @@ import { ReplicheListComponent } from './content-container/repliche-list/replich
 import { OrderFormComponent } from './content-container/order-form/order-form.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PanierComponent } from './panier/panier.component';
+import { authGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   {
     path: 'contents',
     component: ContentContainerComponent,
+    canActivate: [authGuard], // Proteggi la rotta "contents"
     children: [
       { path: '', component: TeatriListComponent },
       { path: 'spettacoli/teatro/:id', component: SpettacoliListComponent },
@@ -37,7 +39,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'panier', component: PanierComponent },
+  { path: 'panier', component: PanierComponent, canActivate: [authGuard] }, // Proteggi la rotta "panier"
   { path: '**', component: NotFoundComponent },
 ];
 

@@ -52,10 +52,17 @@ body {
 
 .container {
   gap: 20px;
-  padding: 20px 100px;
+  padding: 0px 100px;
   max-width: 100%;
   display: block;
   max-width: auto; //Pour centrer le tout
+}
+
+.theatrum-container {
+  min-height: calc(100vh - 82px); /* gli 82px est la height della NavBar*/
+  margin-top: 82px;
+  background-color: var(--primary);
+  padding: 0 100px;
 }
 
 .d-flex {
@@ -160,6 +167,10 @@ body {
   margin: 25px;
 }
 
+.mt-5 {
+  margin-top: 5px;
+}
+
 .mt-10 {
   margin-top: 10px;
 }
@@ -170,6 +181,10 @@ body {
 
 .mt-25 {
   margin-top: 25px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
 }
 
 .mb-10 {
@@ -187,16 +202,16 @@ body {
 //Theme
 .btn {
   font-family: var(--font-family);
-  padding: 10px 15px;
+  padding: 4px 6px;
   border: none;
   border-radius: 4px;
   font-weight: 700;
+  color: var(--text-regular);
   cursor: pointer;
   &-primary {
-    color: white;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     &:hover {
-      background-color: var(--primary);
+      opacity: 0.7;
     }
     transition: background-color 0.4s;
   }
@@ -239,15 +254,6 @@ body {
 
 // Generals
 
-.theatrum-container {
-  min-height: calc(100vh - 82px); /* gli 85.8px est la height della NavBar*/
-  margin-top: 82px;
-  background-color: var(--primary);
-  padding: 0 100px;
-
-  // padding: 0px 0px;
-}
-
 .list {
   li {
     margin-bottom: 5px;
@@ -260,17 +266,27 @@ body {
 
 .formulaire {
   width: 410px;
-  padding: 30px 0;
-  background-color: var(--primary);
-  border: none;
-  border-radius: 10px;
+  padding: 10px 25px;
   color: white;
-
-  .form-group {
+  border: 1px solid var(lightGray);
+  background-color: var(--dark-gray);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(0);
+  opacity: 0;
+  animation: slideRight 2s ease-in-out forwards;
+  transition: height 0.4s;
+  .form-title {
+    color: var(--primary);
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+  .form-control {
     min-width: 300px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     label {
-      font-size: 14px;
+      font-size: 0.8rem;
       font-weight: 500;
       margin-bottom: 3px;
     }
@@ -280,11 +296,16 @@ body {
       border: none;
       border-radius: 3px;
       outline: none;
-      padding: 6px;
+      padding: 4px;
     }
     textarea {
       resize: none;
     }
+  }
+
+  button {
+    width: max-content;
+    align-self: center;
   }
 
   .actions {
@@ -314,23 +335,27 @@ body {
   }
 
   .errorText {
-    color: red;
-    font-size: 13px;
-    max-width: 300px;
-    margin-top: 5px;
+    color: #e41717;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    // max-width: 300px;
+    margin-top: 3px;
   }
 
   .asterisco {
-    color: red;
+    margin-left: 1.5px;
+    color: #e41717;
   }
 
   .separator {
-    border-top: 1px solid white;
-    margin: 10px 0 0px 0;
+    border-color: var(--primary);
     border-radius: 20px;
-    height: 3px;
-    background-color: white;
+    background-color: var(--primary);
+    height: 2px;
     max-width: 300px;
+    margin: 10px auto;
   }
 }
 
@@ -355,5 +380,19 @@ button:disabled {
     opacity: 0.5;
     background-color: var(--secondary);
     color: white;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
   }
 }

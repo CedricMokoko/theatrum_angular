@@ -23,46 +23,39 @@ export class RegisterComponent implements OnInit {
     nome: {
       message: '',
       validations: {
+        minlength: 'Il nome deve avere almeno 3 lettere.',
         required: 'Il nome è obbligatorio.',
-        minlength: 'Il nome deve avere almeno 3 caratteri.',
-        pattern: "Il nome non puo' contenere ne numeri ne caratteri speciali.",
+        pattern: "Il nome non puo' contenere spazi finali o caratteri speciali",
       },
     },
     cognome: {
       message: '',
       validations: {
+        minlength: 'Il cognome deve avere almeno 3 lettere.',
         required: 'Il cognome è obbligatorio.',
-        minlength: 'Il cognome deve avere almeno 3 caratteri.',
         pattern:
-          "Il cognome non puo' contenere ne numeri ne caratteri speciali.",
+          "Il cognome non puo' contenere spazi finali o caratteri speciali",
       },
     },
     email: {
       message: '',
       validations: {
-        required: "L'email è obbligatoria.",
         emailInvalid: "Inserisci un'email valida.",
-      },
-    },
-    telefono: {
-      message: '',
-      validations: {
-        required: 'Il numero di telefono è obbligatorio.',
-        pattern: 'Il numero di telefono deve contenere 10 numeri.',
+        required: "L'email è obbligatoria.",
       },
     },
     password: {
-      message: 'La password deve avere almeno 8 caratteri alfanumerici.',
+      message: '',
       validations: {
-        required: 'La password è obbligatoria.',
         pattern: 'La password deve avere almeno 8 caratteri alfanumerici.',
+        required: 'La password è obbligatoria.',
       },
     },
     confirmPassword: {
       message: '',
       validations: {
-        required: 'La conferma della password è obbligatoria.',
         notMatch: 'Le password non coincidono.',
+        required: 'La conferma della password è obbligatoria.',
       },
     },
     form: {
@@ -91,16 +84,13 @@ export class RegisterComponent implements OnInit {
           ),
         ]),
         email: new FormControl('', [Validators.required, emailValidator()]),
-        telefono: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^[0-9]{10}$/),
-        ]),
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
         ]),
         confirmPassword: new FormControl('', [Validators.required]),
       },
+      // Qui un validator personnalizzato passato in secondo paramettro per il FormGroup
       { validators: passwordMatchValidator() }
     );
   }
@@ -109,11 +99,26 @@ export class RegisterComponent implements OnInit {
     this.formErrorHandler.updateFormErrors(this.form, this.formErrors);
   }
 
+  /** Utils */
+  // Getter per controllare se tutti i campi sono stati toccati o modificati
+  // public get allTouchedOrDirty(): boolean {
+  //   const controls = this.form.controls;
+  //   for (const key in controls) {
+  //     if (controls[key].untouched && controls[key].pristine) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+
   public submit(): void {
     this.updateFormErrors();
     if (this.form.valid) {
       console.log(this.form.value);
       this.form.reset();
+    } else {
+      this.formErrors['form'].message =
+        'Il formulario contiene degli errori, controlla i campi.';
     }
   }
 }

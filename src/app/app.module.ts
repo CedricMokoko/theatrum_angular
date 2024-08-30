@@ -19,6 +19,7 @@ import { ReplicheListComponent } from './content-container/repliche-list/replich
 import { OrderFormComponent } from './content-container/order-form/order-form.component';
 import { PanierComponent } from './panier/panier.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     NgOptimizedImage,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

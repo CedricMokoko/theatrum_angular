@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class FormErrorHandlerService {
-  updateFormErrors(
+  public updateFormErrors(
     form: FormGroup,
     formErrors: {
       [campo: string]: {
@@ -14,7 +14,11 @@ export class FormErrorHandlerService {
       };
     }
   ): void {
-    // Reset error messages
+    // Mi consente di uscire subito della function se il modulo non esiste.
+    if (!form) {
+      return;
+    }
+    // Questo serve per cancellare eventuali messaggi di errore precedenti.
     for (const campo in formErrors) {
       formErrors[campo].message = '';
     }
@@ -35,18 +39,13 @@ export class FormErrorHandlerService {
 
       if (control.invalid && (control.touched || control.dirty)) {
         const messages = formErrors[campo].validations;
+
         for (const key in control.errors) {
           if (messages[key]) {
             formErrors[campo].message += messages[key] + ' ';
           }
         }
         formErrors[campo].message = formErrors[campo].message.trim();
-      }
-
-      //Qui nel caso in ciu il formulario non risulta valido al momento del submit
-      if (form.invalid) {
-        formErrors['form'].message =
-          'Il formulario contiene errori. Per favore, controlla i campi evidenziati.';
       }
     }
   }

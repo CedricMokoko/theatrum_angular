@@ -1,9 +1,13 @@
-<div>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <h3>Login</h3>
+<div class="container d-flex flex-justify-content-center">
+  <form
+    class="formulaire d-flex flex-column"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
+    <h3 class="form-title">Login</h3>
 
     <!-- Email -->
-    <div>
+    <div class="form-control d-flex flex-column">
       <label for="email">Email<span class="asterisco">*</span></label>
       <input
         formControlName="email"
@@ -11,11 +15,12 @@
         id="email"
         name="email"
         placeholder="exemple@gmail.com"
+        (change)="updateFormErrors()"
       />
     </div>
 
     <!-- Codice utente -->
-    <div>
+    <div class="form-control d-flex flex-column">
       <label for="codiceUtente"
         >Codice utente<span class="asterisco">*</span></label
       >
@@ -25,6 +30,7 @@
         type="text"
         id="codiceUtente"
         placeholder="digitare codice utente"
+        (change)="updateFormErrors()"
       />
     </div>
 
@@ -33,6 +39,6 @@
       <div class="separator"></div>
       <p class="errorText">{{ formErrors["form"].message }}</p>
     </div>
-    <button class="">Sign in</button>
+    <button class="btn btn-primary mb-5 mt-10">Sign in</button>
   </form>
 </div>

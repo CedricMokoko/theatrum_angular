@@ -1,7 +1,7 @@
 <nav
   class="d-flex flex-row flex-justify-content-between flex-align-items-center"
 >
-  <a class="logo" [routerLink]="['']">
+  <a class="logo" [routerLink]="['/contents']">
     <img
       ngSrc="assets/theatrum_logo.png"
       width="70"
@@ -11,27 +11,24 @@
     />
   </a>
   <ul class="d-flex">
-    <li>
+    <li *ngIf="!authService.isAuthenticated()">
       <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
     </li>
-    <li>
+    <li *ngIf="!authService.isAuthenticated()">
       <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
     </li>
-    <li>
+    <li *ngIf="!authService.isAuthenticated()">
       <a>About us</a>
     </li>
 
-    <li>
+    <li *ngIf="authService.isAuthenticated()">
       <a [routerLink]="['/contents']" routerLinkActive="active">Home</a>
     </li>
-    <li>
-      <a [routerLink]="['/panier']" routerLinkActive="active">Panier</a>
+    <li *ngIf="authService.isAuthenticated()">
+      <a [routerLink]="['./panier']" routerLinkActive="active">Panier</a>
     </li>
-    <li>
-      <a>Contact us</a>
-    </li>
-    <li>
-      <a [routerLink]="['/']">Logout</a>
+    <li *ngIf="authService.isAuthenticated()">
+      <a (click)="logout()" [routerLink]="['/']">Logout</a>
     </li>
   </ul>
 </nav>

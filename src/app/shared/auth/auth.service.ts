@@ -18,8 +18,8 @@ export class AuthService {
   }
 
   // Metodo per il login (per simulare il login e impostare il token)
-  public login(email: string, codiceUtente: number): void {
-    const token = `${email}/${codiceUtente}-token`;
+  public login(nome: string): void {
+    const token = `${nome}-token`;
     this.clienteToken$.next(token);
     // Salva il token nel sessionStorage
     sessionStorage.setItem('authToken', token);

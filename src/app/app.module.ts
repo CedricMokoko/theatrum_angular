@@ -20,6 +20,7 @@ import { OrderFormComponent } from './content-container/order-form/order-form.co
 import { PanierComponent } from './panier/panier.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RegistrationSuccessComponent } from './homepage/registration-success/registration-success.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     OrderFormComponent,
     PanierComponent,
     NotFoundComponent,
+    RegistrationSuccessComponent,
   ],
   imports: [
     BrowserModule,

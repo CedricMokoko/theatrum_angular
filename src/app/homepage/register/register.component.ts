@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
 import { FormErrorHandlerService } from '../../shared/services/form-error-handler.service';
 import { passwordMatchValidator } from '../../shared/validators/passwordmatch.validator';
+import { ClienteService } from '../../shared/services/cliente.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -64,7 +66,11 @@ export class RegisterComponent implements OnInit {
     },
   };
 
-  constructor(private formErrorHandler: FormErrorHandlerService) {}
+  constructor(
+    private formErrorHandler: FormErrorHandlerService,
+    private clienteService: ClienteService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup(
@@ -114,8 +120,21 @@ export class RegisterComponent implements OnInit {
   public submit(): void {
     this.updateFormErrors();
     if (this.form.valid) {
-      console.log(this.form.value);
+      const cognome = this.form.get('cognome')?.value;
+      const nome = this.form.get('nome')?.value;
+      const email = this.form.get('email')?.value;
+      const password = this.form.get('password')?.value;
+
       this.form.reset();
+      this.clienteService.register$(cognome, nome, email, password).subscribe({
+        next: (cliente) => {
+          this.router.navigate(['/register-success']);
+        },
+        // messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
+        error: (error) => {
+          this.formErrors['form'].message = error.message;
+        },
+      });
     } else {
       this.formErrors['form'].message =
         'Il formulario contiene degli errori, controlla i campi.';

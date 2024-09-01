@@ -4,7 +4,7 @@ import { emailValidator } from '../../shared/validators/email.validator';
 import { FormErrorHandlerService } from '../../shared/services/form-error-handler.service';
 import { Subscription, tap } from 'rxjs';
 import { ClienteService } from '../../shared/services/cliente.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../shared/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,10 +30,11 @@ export class LoginComponent implements OnInit {
         emailInvalid: "Inserisci un'email valida.",
       },
     },
-    codiceUtente: {
+    password: {
       message: '',
       validations: {
-        required: 'Il codice utente obbligatorio.',
+        pattern: 'La password deve avere almeno 8 caratteri alfanumerici.',
+        required: 'La password è obbligatoria.',
       },
     },
     form: {
@@ -54,7 +55,10 @@ export class LoginComponent implements OnInit {
     //Qui inizializzo il mio formulario
     this.form = new FormGroup({
       email: new FormControl('', [emailValidator(), Validators.required]),
-      codiceUtente: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        // Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+      ]),
     });
 
     this.subscription.add(
@@ -78,13 +82,12 @@ export class LoginComponent implements OnInit {
   public submit(): void {
     if (this.form.valid) {
       const email = this.form.get('email')?.value;
-      const codiceUtente = this.form.get('codiceUtente')?.value;
+      const password = this.form.get('password')?.value;
 
-      this.clienteService.login$(email, codiceUtente).subscribe({
+      this.clienteService.login$(email, password).subscribe({
         next: (cliente) => {
-          this.authService.login(email, codiceUtente);
+          this.authService.login(cliente.nome);
           this.router.navigate(['/contents']);
-          console.log('Cliente autenticato:', cliente); // Debug: stampa i dati del cliente
         },
         // messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
         error: (error) => {
@@ -92,7 +95,7 @@ export class LoginComponent implements OnInit {
         },
       });
     } else {
-      this.formErrors['form'].message = 'Compila il formulario per intero.';
+      this.formErrors['form'].message = 'Invalid email or password.';
     }
   }
 }

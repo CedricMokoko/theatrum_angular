@@ -1,0 +1,35 @@
+.message-content {
+  width: max-content;
+  padding: 20px;
+  background-color: var(--dark-gray);
+  border: 1px solid var(lightGray);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translateX(0);
+  opacity: 0;
+  animation: slideRight 2s ease-in-out forwards;
+
+  .intro-heading {
+    font-size: 1.5em;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 1em;
+    color: white;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .login-link {
+    margin-top: 20px;
+    color: var(--primary);
+    text-align: end;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

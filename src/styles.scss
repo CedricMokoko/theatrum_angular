@@ -46,6 +46,8 @@ a {
 body {
   font-family: var(--font-family);
   color: var(--text-regular);
+  background-color: var(--primary);
+  min-height: max-content;
 }
 
 // Layout
@@ -59,9 +61,8 @@ body {
 }
 
 .theatrum-container {
-  min-height: calc(100vh - 82px); /* gli 82px est la height della NavBar*/
-  margin-top: 82px;
-  background-color: var(--primary);
+  min-height: calc(100vh - 85px); /* gli 82px est la height della NavBar*/
+  margin-top: 85px;
   padding: 0 100px;
 }
 

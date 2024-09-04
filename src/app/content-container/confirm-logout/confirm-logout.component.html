@@ -1,0 +1,17 @@
+<div
+  class="theatrum-container d-flex flex-row flex-justify-content-center flex-align-items-center"
+>
+  <div class="message-content">
+    <p class="intro-text">Sei sicuro di voler uscire dall'applicazione ?</p>
+    <div class="btn-container">
+      <li
+        class="lista d-flex flex-row flex-align-items-center flex-justify-content-center"
+      >
+        <a class="btn btn-primary" (click)="logout()" [routerLink]="['/']"
+          >Si</a
+        >
+        <a class="btn btn-primary" [routerLink]="['/contents']">No</a>
+      </li>
+    </div>
+  </div>
+</div>

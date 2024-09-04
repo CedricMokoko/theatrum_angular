@@ -31,7 +31,7 @@ export class AuthService {
     sessionStorage.removeItem('authToken');
   }
 
-  // Verifica se l'utente è autenticato
+  // Verifica se l'utente è authenticato
   public isAuthenticated(): boolean {
     return !!this.clienteToken$.value;
   }

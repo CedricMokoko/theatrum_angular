@@ -12,9 +12,8 @@ export class ClienteService {
   constructor(private http: HttpClient) {}
 
   // Metodo per il login
-
   public login$(email: string, password: string): Observable<Cliente> {
-    // Oggetto per la richiesta di login
+    // Oggetto per la richiesta di login che mandiamo poi al server. Constituisce il body della richiesta.
     const loginRequest = {
       email: email,
       password: password,
@@ -31,14 +30,13 @@ export class ClienteService {
     email: string,
     password: string
   ): Observable<Cliente> {
-    // Oggetto per la richiesta di registrazione
+    // Oggetto per la richiesta di registrazione che mandiamo poi al server. Constituisce il body della richiesta.
     const registerRequest = {
       cognome: cognome,
       nome: nome,
       email: email,
       password: password,
     };
-
     return this.http
       .post<Cliente>(`${this.apiBaseUrl}/register`, registerRequest)
       .pipe(catchError(this.handleError('register')));

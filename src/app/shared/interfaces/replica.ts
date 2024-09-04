@@ -1,7 +1,7 @@
 import { Spettacolo } from './spettacolo';
 
 export interface Replica {
-  id: string; // COD_REPLICA
-  data: Date; // DATA_REPLICA
+  id: string;
+  data: Date;
   spettacolo: Spettacolo; // Relazione ManyToOne con Spettacolo
 }

@@ -1,7 +1,7 @@
 <nav
   class="d-flex flex-row flex-justify-content-between flex-align-items-center"
 >
-  <a class="logo" [routerLink]="['/contents']">
+  <a class="logo" [routerLink]="getRouterLink()">
     <img
       ngSrc="assets/theatrum_logo.png"
       width="70"
@@ -10,6 +10,7 @@
       priority
     />
   </a>
+
   <ul class="d-flex">
     <li *ngIf="!authService.isAuthenticated()">
       <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
@@ -25,10 +26,10 @@
       <a [routerLink]="['/contents']" routerLinkActive="active">Home</a>
     </li>
     <li *ngIf="authService.isAuthenticated()">
-      <a [routerLink]="['./panier']" routerLinkActive="active">Panier</a>
+      <a [routerLink]="['/panier']" routerLinkActive="active">Panier</a>
     </li>
     <li *ngIf="authService.isAuthenticated()">
-      <a (click)="logout()" [routerLink]="['/']">Logout</a>
+      <a [routerLink]="['/confirm-logout']" routerLinkActive="active">Logout</a>
     </li>
   </ul>
 </nav>

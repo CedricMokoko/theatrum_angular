@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +13,10 @@ export class HeaderComponent implements OnInit {
     this.checkAuthentication();
   }
 
+  getRouterLink(): string[] {
+    return this.authService.isAuthenticated() ? ['/contents'] : ['/'];
+  }
   private checkAuthentication(): void {
     this.authService.isAuthenticated;
-  }
-
-  // Funzione di logout
-  logout(): void {
-    this.authService.logout();
   }
 }

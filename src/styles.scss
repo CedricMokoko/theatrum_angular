@@ -384,6 +384,13 @@ button:disabled {
   }
 }
 
+/* Disabilita il pulsante quando è disabilitato */
+button[disabled] {
+  background-color: #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
 @keyframes slideRight {
   0% {
     transform: translateX(-20%);

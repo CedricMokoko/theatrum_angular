@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
-import { FormErrorHandlerService } from '../../shared/services/form-error-handler.service';
 import { Subscription, tap } from 'rxjs';
 import { ClienteService } from '../../shared/services/cliente.service';
-import { AuthService } from '../../shared/auth/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  //Qui dicchiaro il mio formulario
   public form!: FormGroup;
 
   //Qui un oggetto per la mia gestione degli errori legati al mio formulario.
@@ -23,20 +21,6 @@ export class LoginComponent implements OnInit {
       validations: { [field: string]: string };
     };
   } = {
-    email: {
-      message: '',
-      validations: {
-        required: "L'email è obbligatoria.",
-        emailInvalid: "Inserisci un'email valida.",
-      },
-    },
-    password: {
-      message: '',
-      validations: {
-        pattern: 'La password deve avere almeno 8 caratteri alfanumerici.',
-        required: 'La password è obbligatoria.',
-      },
-    },
     form: {
       message: '',
       validations: {},
@@ -45,20 +29,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private clienteService: ClienteService,
-    private authService: AuthService, // Inietta AuthService
+    private authService: AuthService,
     private router: Router
   ) {}
 
   public subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    //Qui inizializzo il mio formulario
     this.form = new FormGroup({
       email: new FormControl('', [emailValidator(), Validators.required]),
-      password: new FormControl('', [
-        Validators.required,
-        // Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
-      ]),
+      password: new FormControl('', [Validators.required]),
     });
 
     this.subscription.add(
@@ -69,11 +49,10 @@ export class LoginComponent implements OnInit {
   }
 
   public updateFormErrors() {
-    // Mi consente di uscire subito della function se il modulo non esiste.
     if (!this.form) {
       return;
     }
-    // Questo serve per cancellare eventuali messaggi di errore precedenti.
+    // Questo serve per cancellare eventuali messaggi di errore già visibles.
     for (const campo in this.formErrors) {
       this.formErrors[campo].message = '';
     }
@@ -89,13 +68,14 @@ export class LoginComponent implements OnInit {
           this.authService.login(cliente.nome);
           this.router.navigate(['/contents']);
         },
-        // messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
+        // Messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
         error: (error) => {
           this.formErrors['form'].message = error.message;
         },
       });
     } else {
-      this.formErrors['form'].message = 'Invalid email or password.';
+      this.formErrors['form'].message =
+        'Il formulario è incompleto o contiene degli errori, controlla i campi.';
     }
   }
 }

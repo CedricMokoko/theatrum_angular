@@ -2,8 +2,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
-import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -19,8 +20,8 @@ import { ReplicheListComponent } from './content-container/repliche-list/replich
 import { OrderFormComponent } from './content-container/order-form/order-form.component';
 import { PanierComponent } from './panier/panier.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegistrationSuccessComponent } from './homepage/registration-success/registration-success.component';
+import { ConfirmLogoutComponent } from './content-container/confirm-logout/confirm-logout.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { RegistrationSuccessComponent } from './homepage/registration-success/re
     PanierComponent,
     NotFoundComponent,
     RegistrationSuccessComponent,
+    ConfirmLogoutComponent,
   ],
   imports: [
     BrowserModule,

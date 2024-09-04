@@ -1,0 +1,12 @@
+// Per i form
+
+// Getter per controllare se tutti i campi sono stati toccati o modificati
+// public get allTouchedOrDirty(): boolean {
+//   const controls = this.form.controls;
+//   for (const key in controls) {
+//     if (controls[key].untouched && controls[key].pristine) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }

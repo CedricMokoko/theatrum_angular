@@ -1,10 +1,10 @@
 import { Teatro } from './teatro';
 
 export interface Spettacolo {
-  id: string; // COD_SPETTACOLO
-  titolo: string; // TITOLO
-  autore: string; // AUTORE
-  regista: string; // REGISTA
-  prezzo: number; // PREZZO
+  id: string;
+  titolo: string;
+  autore: string;
+  regista: string;
+  prezzo: number;
   teatro: Teatro; // Relazione ManyToOne con Teatro
 }

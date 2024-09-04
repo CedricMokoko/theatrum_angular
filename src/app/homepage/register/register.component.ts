@@ -5,6 +5,7 @@ import { FormErrorHandlerService } from '../../shared/services/form-error-handle
 import { passwordMatchValidator } from '../../shared/validators/passwordmatch.validator';
 import { ClienteService } from '../../shared/services/cliente.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,6 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-  //Qui dicchiaro il mio formulario
   public form!: FormGroup;
 
   //Qui un oggetto per la mia gestione degli errori legati al mio formulario.
@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
       validations: {
         minlength: 'Il nome deve avere almeno 3 lettere.',
         required: 'Il nome è obbligatorio.',
-        pattern: "Il nome non puo' contenere spazi finali o caratteri speciali",
+        pattern:
+          "Il nome non puo' contenere spazi finali o caratteri speciali.",
       },
     },
     cognome: {
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
         minlength: 'Il cognome deve avere almeno 3 lettere.',
         required: 'Il cognome è obbligatorio.',
         pattern:
-          "Il cognome non puo' contenere spazi finali o caratteri speciali",
+          "Il cognome non puo' contenere spazi finali o caratteri speciali.",
       },
     },
     email: {
@@ -49,7 +50,8 @@ export class RegisterComponent implements OnInit {
     password: {
       message: '',
       validations: {
-        pattern: 'La password deve avere almeno 8 caratteri alfanumerici.',
+        pattern:
+          'La password deve essere di almeno 8 caratteri e contenere almeno una lettera, un numero e un carattere speciale tra: ! @ # $ % ^ & * ( ) _ + - = [ ] { } ; \' : "  | , . < > / ?.',
         required: 'La password è obbligatoria.',
       },
     },
@@ -92,11 +94,13 @@ export class RegisterComponent implements OnInit {
         email: new FormControl('', [Validators.required, emailValidator()]),
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+          Validators.pattern(
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/
+          ),
         ]),
         confirmPassword: new FormControl('', [Validators.required]),
       },
-      // Qui un validator personnalizzato passato in secondo paramettro per il FormGroup
+      // Qui un validator personnalizzato passato in secondo param per il FormGroup
       { validators: passwordMatchValidator() }
     );
   }
@@ -105,29 +109,16 @@ export class RegisterComponent implements OnInit {
     this.formErrorHandler.updateFormErrors(this.form, this.formErrors);
   }
 
-  /** Utils */
-  // Getter per controllare se tutti i campi sono stati toccati o modificati
-  // public get allTouchedOrDirty(): boolean {
-  //   const controls = this.form.controls;
-  //   for (const key in controls) {
-  //     if (controls[key].untouched && controls[key].pristine) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
-
   public submit(): void {
-    this.updateFormErrors();
     if (this.form.valid) {
       const cognome = this.form.get('cognome')?.value;
       const nome = this.form.get('nome')?.value;
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
 
-      this.form.reset();
       this.clienteService.register$(cognome, nome, email, password).subscribe({
         next: (cliente) => {
+          this.form.reset();
           this.router.navigate(['/register-success']);
         },
         // messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
@@ -136,8 +127,9 @@ export class RegisterComponent implements OnInit {
         },
       });
     } else {
+      this.updateFormErrors();
       this.formErrors['form'].message =
-        'Il formulario contiene degli errori, controlla i campi.';
+        'Il formulario è incompleto o contiene degli errori, controlla i campi.';
     }
   }
 }

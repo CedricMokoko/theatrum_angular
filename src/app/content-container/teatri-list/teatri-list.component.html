@@ -1,1 +1,12 @@
-<p>teatri-list works!</p>
+<!-- <div
+  class="theatrum-container d-flex flex-row flex-align-items-center flex-justify-content-between"
+> -->
+<ul *ngIf="teatri" class="mb-20 teatri-list">
+  <li
+    [routerLink]="['/contents/teatro', teatro.id, teatro.nome]"
+    *ngFor="let teatro of teatri"
+  >
+    <p>{{ teatro.nome }}</p>
+  </li>
+</ul>
+<!-- </div> -->

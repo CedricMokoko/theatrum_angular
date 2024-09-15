@@ -39,12 +39,18 @@ const routes: Routes = [
     canActivate: [authGuard], // Protegge la rotta "contents" da utenti non connessi
     children: [
       { path: '', component: TeatriListComponent },
-      { path: 'spettacoli/teatro/:id', component: SpettacoliListComponent },
-      { path: 'repliche/spettacolo/:id', component: ReplicheListComponent },
       {
-        path: 'order-form/replica/:id/spettacolo/:id/teatro/:id',
-        component: OrderFormComponent,
+        path: 'teatro/:teatro_id/:teatro_nome',
+        component: SpettacoliListComponent,
       },
+      {
+        path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list',
+        component: ReplicheListComponent,
+      },
+      // {
+      //   path: 'order-form/replica/:id/spettacolo/:id/:titolo/teatro/:id/:nome',
+      //   component: OrderFormComponent,
+      // },
     ],
   },
   {

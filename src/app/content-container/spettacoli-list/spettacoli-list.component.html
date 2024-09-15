@@ -1,1 +1,17 @@
-<p>spettacoli-list works!</p>
+<!-- <div
+  class="theatrum-container d-flex flex-row flex-align-items-center flex-justify-content-between"
+> -->
+<ul *ngIf="spettacoli" class="mb-20 spettacoli-list">
+  <li
+    [routerLink]="[
+      'spettacolo',
+      spettacolo.id,
+      spettacolo.titolo,
+      'repliche-list'
+    ]"
+    *ngFor="let spettacolo of spettacoli"
+  >
+    <p>{{ spettacolo.titolo }}</p>
+  </li>
+</ul>
+<!-- </div> -->

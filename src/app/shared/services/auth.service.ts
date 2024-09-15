@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private clienteToken$: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
-  >(null);
+  >(null); // Ici null est la valeur par defaut que je passe à mon "BehaviorSubject" car c'est obbligé de lui passer une valeur par defaut.
 
   constructor() {
     // Carica il token se è presente nel sessionStorage all'avvio

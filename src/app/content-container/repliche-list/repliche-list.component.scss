@@ -1,15 +1,31 @@
-.repliche-list {
-  li {
-    width: 400px;
-    margin-bottom: 5px;
-    padding: 10px 15px;
-    border: 1px solid var(--lightGray);
-    border-radius: 3px;
-    cursor: pointer;
-    &:hover {
-      background-color: var(--lightGray);
-      letter-spacing: 0.1em;
+.container {
+  padding: 30px 5px;
+  h3 {
+    color: var(--dark-gray);
+  }
+  .repliche-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+    // background-color: aqua;
+
+    li {
+      padding: 10px 15px;
+      border: 1px solid var(--dark-gray);
+      border-radius: 8px;
+      background-color: var(--dark-gray);
+      color: var(--lightGray);
+      cursor: pointer;
+      &:hover {
+        border: 1px solid var(lightGray);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        letter-spacing: 0.17em;
+      }
+      .replica-name {
+        color: var(--primary);
+      }
+      transition: background-color 0.5s, letter-spacing 0.5s;
     }
-    transition: background-color 0.3s, letter-spacing 0.3s;
   }
 }

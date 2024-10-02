@@ -1,17 +1,21 @@
-<!-- <div
-  class="theatrum-container d-flex flex-row flex-align-items-center flex-justify-content-between"
-> -->
-<ul *ngIf="spettacoli" class="mb-20 spettacoli-list">
-  <li
-    [routerLink]="[
-      'spettacolo',
-      spettacolo.id,
-      spettacolo.titolo,
-      'repliche-list'
-    ]"
-    *ngFor="let spettacolo of spettacoli"
-  >
-    <p>{{ spettacolo.titolo }}</p>
-  </li>
-</ul>
-<!-- </div> -->
+<div class="container d-flex flex-column">
+  <h3 class="mb-20">Lista degli spettacoli</h3>
+  <ul *ngIf="spettacoli" class="mb-20 spettacoli-list">
+    <li
+      [routerLink]="[
+        'spettacolo',
+        spettacolo.id,
+        spettacolo.titolo,
+        'repliche-list'
+      ]"
+      *ngFor="let spettacolo of spettacoli"
+    >
+      <h4 class="mb-10 spettacolo-name">{{ spettacolo.titolo }}</h4>
+      <p><strong>Autore:</strong> {{ spettacolo.autore }}</p>
+      <p class="mb-5"><strong>Regista:</strong> {{ spettacolo.regista }}</p>
+      <p>
+        <strong>{{ spettacolo.teatro.nome }}</strong>
+      </p>
+    </li>
+  </ul>
+</div>

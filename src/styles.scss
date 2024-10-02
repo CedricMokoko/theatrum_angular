@@ -44,26 +44,21 @@ a {
 }
 
 body {
+  padding: 0 100px;
   font-family: var(--font-family);
   color: var(--text-regular);
   background-color: var(--primary);
-  min-height: max-content;
+  min-height: 100vh;
 }
 
 // Layout
 
-.container {
-  gap: 20px;
-  padding: 0px 100px;
-  max-width: 100%;
-  display: block;
-  max-width: auto; //Pour centrer le tout
-}
-
 .theatrum-container {
-  min-height: calc(100vh - 85px); /* gli 82px est la height della NavBar*/
+  min-height: calc(100vh - 85px); /* gli 85px est la height della NavBar*/
+  // background-color: #333;
+  // border: 1px solid black;
   margin-top: 85px;
-  padding: 0 100px;
+  max-width: auto;
 }
 
 .d-flex {
@@ -201,6 +196,7 @@ body {
 }
 
 //Theme
+
 .btn {
   font-family: var(--font-family);
   padding: 4px 6px;
@@ -228,6 +224,7 @@ body {
 }
 
 //Debug pour bien observer les limite de nos élément html
+
 .d1 {
   border: 1px solid red;
 }
@@ -385,11 +382,14 @@ button:disabled {
 }
 
 /* Disabilita il pulsante quando è disabilitato */
+
 button[disabled] {
   background-color: #ddd;
   color: #aaa;
   cursor: not-allowed;
 }
+
+// Animations
 
 @keyframes slideRight {
   0% {
@@ -402,5 +402,16 @@ button[disabled] {
   100% {
     transform: translateX(0%);
     opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

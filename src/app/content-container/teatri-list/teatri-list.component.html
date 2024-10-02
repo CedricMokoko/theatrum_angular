@@ -1,12 +1,16 @@
-<!-- <div
-  class="theatrum-container d-flex flex-row flex-align-items-center flex-justify-content-between"
-> -->
-<ul *ngIf="teatri" class="mb-20 teatri-list">
-  <li
-    [routerLink]="['/contents/teatro', teatro.id, teatro.nome]"
-    *ngFor="let teatro of teatri"
-  >
-    <p>{{ teatro.nome }}</p>
-  </li>
-</ul>
-<!-- </div> -->
+<div class="teatri-container d-flex flex-row flex-justify-content-between">
+  <!-- <div class="user-content">user</div> -->
+  <ul *ngIf="teatri" class="mb-20 teatri-list flex-fill">
+    <li
+      [routerLink]="['/contents/teatro', teatro.id, teatro.nome]"
+      *ngFor="let teatro of teatri"
+    >
+      <h3 class="mb-10 teatro-name">{{ teatro.nome }}</h3>
+      <p>
+        {{ teatro.indirizzo }} - {{ teatro.citta }} ({{ teatro.provincia }})
+      </p>
+      <p>Telefono: {{ teatro.telefono }}</p>
+      <p>Capienza: {{ teatro.posti }} posti</p>
+    </li>
+  </ul>
+</div>

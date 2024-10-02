@@ -1,23 +1,26 @@
-<!-- <div
-  class="theatrum-container d-flex flex-row flex-align-items-center flex-justify-content-between"
-> -->
-<ul *ngIf="repliche" class="mb-20 repliche-list">
-  <li *ngFor="let replica of repliche">
-    <p>
-      {{ replica.spettacolo.teatro.nome }} -
-      {{ replica.spettacolo.teatro.citta }} ({{
-        replica.spettacolo.teatro.provincia
-      }})
-    </p>
-    <p>Telefono: {{ replica.spettacolo.teatro.telefono }}</p>
+<div class="container d-flex flex-column">
+  <h3 class="mb-20">Lista delle repliche</h3>
+  <ul *ngIf="repliche" class="mb-20 repliche-list">
+    <li *ngFor="let replica of repliche">
+      <h4 class="mb-10 replica-name">{{ replica.id }} - {{ replica.data }}</h4>
+      <p><strong>Titolo spettacolo:</strong> {{ replica.spettacolo.titolo }}</p>
+      <p>
+        <strong>Prezzo biglietto unico:</strong>
+        {{ replica.spettacolo.prezzo }}$
+      </p>
+      <p>
+        <strong>Total posti disponibili:</strong>
+        {{ replica.spettacolo.teatro.posti }}
+      </p>
 
-    <p>Indirizzo: {{ replica.spettacolo.teatro.indirizzo }}</p>
-    <p>{{ replica.id }} - {{ replica.data }}</p>
-    <p></p>
-    <p>Titolo spettacolo: {{ replica.spettacolo.titolo }}</p>
-    <p>Total posti disponibili: {{ replica.spettacolo.teatro.posti }}</p>
-    <p>Prezzo biglietto unico: {{ replica.spettacolo.prezzo }}$</p>
-    <p>Regista: {{ replica.spettacolo.regista }}</p>
-  </li>
-</ul>
-<!-- </div> -->
+      <p>
+        {{ replica.spettacolo.teatro.nome }} -
+        {{ replica.spettacolo.teatro.indirizzo }} -
+        {{ replica.spettacolo.teatro.citta }} ({{
+          replica.spettacolo.teatro.provincia
+        }})
+      </p>
+      <p><strong>Regista:</strong> {{ replica.spettacolo.regista }}</p>
+    </li>
+  </ul>
+</div>

@@ -48,7 +48,7 @@ const routes: Routes = [
         component: ReplicheListComponent,
       },
       // {
-      //   path: 'order-form/replica/:id/spettacolo/:id/:titolo/teatro/:id/:nome',
+      //   path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:id',
       //   component: OrderFormComponent,
       // },
     ],

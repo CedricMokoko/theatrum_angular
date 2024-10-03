@@ -1,26 +1,32 @@
 <div class="container d-flex flex-column">
   <h3 class="mb-20">Lista delle repliche</h3>
   <ul *ngIf="repliche" class="mb-20 repliche-list">
-    <li *ngFor="let replica of repliche">
+    <li
+      [routerLink]="['order-form/replica', replica.id]"
+      *ngFor="let replica of repliche"
+    >
       <h4 class="mb-10 replica-name">{{ replica.id }} - {{ replica.data }}</h4>
       <p><strong>Titolo spettacolo:</strong> {{ replica.spettacolo.titolo }}</p>
       <p>
         <strong>Prezzo biglietto unico:</strong>
         {{ replica.spettacolo.prezzo }}$
       </p>
-      <p>
+      <p class="mb-10">
         <strong>Total posti disponibili:</strong>
         {{ replica.spettacolo.teatro.posti }}
       </p>
 
       <p>
-        {{ replica.spettacolo.teatro.nome }} -
-        {{ replica.spettacolo.teatro.indirizzo }} -
-        {{ replica.spettacolo.teatro.citta }} ({{
-          replica.spettacolo.teatro.provincia
-        }})
+        <strong
+          >{{ replica.spettacolo.teatro.nome }} -
+          {{ replica.spettacolo.teatro.indirizzo }} -
+          {{ replica.spettacolo.teatro.citta }} ({{
+            replica.spettacolo.teatro.provincia
+          }})
+        </strong>
       </p>
       <p><strong>Regista:</strong> {{ replica.spettacolo.regista }}</p>
+      <p><strong>Autore:</strong> {{ replica.spettacolo.autore }}</p>
     </li>
   </ul>
 </div>

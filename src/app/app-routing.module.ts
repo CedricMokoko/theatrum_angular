@@ -47,10 +47,10 @@ const routes: Routes = [
         path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list',
         component: ReplicheListComponent,
       },
-      // {
-      //   path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:id',
-      //   component: OrderFormComponent,
-      // },
+      {
+        path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:replica.id',
+        component: OrderFormComponent,
+      },
     ],
   },
   {

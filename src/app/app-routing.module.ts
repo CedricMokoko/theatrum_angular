@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'contents',
+    path: 'contents/:cliente_id/:cliente_nome',
     component: ContentContainerComponent,
     canActivate: [authGuard], // Protegge la rotta "contents" da utenti non connessi
     children: [
@@ -48,17 +48,21 @@ const routes: Routes = [
         component: ReplicheListComponent,
       },
       {
-        path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:replica.id',
+        path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:replica_id',
         component: OrderFormComponent,
       },
     ],
   },
   {
-    path: 'confirm-logout',
+    path: 'confirm-logout/:cliente_id/:cliente_nome',
     component: ConfirmLogoutComponent,
     canActivate: [authGuard], // Protegge la rotta "confirm-logout" da utenti non connessi
   },
-  { path: 'panier', component: PanierComponent, canActivate: [authGuard] }, // Protegge la rotta "panier" da utenti non connessi
+  {
+    path: 'panier/:cliente_id/:cliente_nome',
+    component: PanierComponent,
+    canActivate: [authGuard],
+  }, // Protegge la rotta "panier" da utenti non connessi
   { path: '**', component: NotFoundComponent },
 ];
 

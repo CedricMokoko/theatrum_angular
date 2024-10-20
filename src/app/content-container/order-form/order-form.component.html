@@ -1,1 +1,102 @@
-<p>order-form works!</p>
+<div
+  class="container d-flex flex-justify-content-center"
+  style="padding-top: 30px"
+>
+  <form
+    [formGroup]="orderForm"
+    class="formulaire d-flex flex-column flex-align-items-center"
+  >
+    <div class="d-flex flex-column form-group">
+      <label for="">Codice Operazione <span class="asterisco">*</span></label>
+      <input
+        #nameInput
+        name="name"
+        formControlName="name"
+        type="text"
+        placeholder="cocktail name..."
+      />
+    </div>
+    <div class="d-flex flex-column form-group">
+      <label for="">Codice Cliente <span class="asterisco">*</span></label>
+      <input
+        #nameInput
+        name="name"
+        formControlName="name"
+        type="text"
+        placeholder="cocktail name..."
+      />
+    </div>
+
+    <div class="d-flex flex-column form-group">
+      <label for="">Codice Replica <span class="asterisco">*</span></label>
+      <input
+        #nameInput
+        name="name"
+        formControlName="name"
+        type="text"
+        placeholder="cocktail name..."
+      />
+    </div>
+
+    <!-- Radio button -->
+    <div class="d-flex flex-column form-group">
+      <label for="">Tipo pagamento</label>
+      <div class="d-flex flex-row">
+        <div>
+          <label for="" style="color: #000"
+            >Carta di Credito
+            <input formControlName="gender" type="radio" value="male"
+          /></label>
+        </div>
+        <div>
+          <label for="" style="margin-left: 15px; color: #000"
+            >Bonifico
+            <input formControlName="gender" type="radio" value="female"
+          /></label>
+        </div>
+      </div>
+    </div>
+
+    <div
+      formArrayName="ingredients"
+      class="d-flex flex-column form-group-ingredients"
+    >
+      <label>Quantità <span class="asterisco">*</span></label>
+      <input
+        class="input-ingredients"
+        formControlName="quantity"
+        name="quantity"
+        type="number"
+        placeholder="quantity..."
+      />
+    </div>
+    <hr class="separator" />
+
+    <!-- routerLink="../" me fait retourner sur la route precedente.
+     [disabled]="cocktailForm.invalid" permet de desactiver le btn si le form n'est pas
+     valide et du coté du css on peut donner un effet visuel en utilisant ":disabled" -->
+    <!-- <div class="d-flex flex-align-content-center actions">
+      <button [disabled]="cocktailForm.invalid" class="btn btn-custom">
+        {{ cocktail ? "Edit" : "Submit" }}
+      </button>
+      <button
+        class="btn btn-custom"
+        type="button"
+        (click)="redirectToCocktailsList()"
+      >
+        Annuler
+      </button>
+      <button (click)="addIngredient()" type="button" class="btn btn-custom">
+        + ingredients
+      </button>
+      <button
+        *ngIf="cocktail"
+        (click)="delete()"
+        type="button"
+        class="btn btn-custom"
+      >
+        Delete
+      </button> -->
+    <!-- </div> -->
+  </form>
+</div>

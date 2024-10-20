@@ -2,7 +2,14 @@
   <!-- <div class="user-content">user</div> -->
   <ul *ngIf="teatri" class="mb-20 teatri-list flex-fill">
     <li
-      [routerLink]="['/contents/teatro', teatro.id, teatro.nome]"
+      [routerLink]="[
+        '/contents',
+        clienteId,
+        clienteNome,
+        'teatro',
+        teatro.id,
+        teatro.nome
+      ]"
       *ngFor="let teatro of teatri"
     >
       <h3 class="mb-10 teatro-name">{{ teatro.nome }}</h3>

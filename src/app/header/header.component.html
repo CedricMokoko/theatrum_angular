@@ -23,13 +23,25 @@
     <!-- </li> -->
 
     <li *ngIf="authService.isAuthenticated()">
-      <a [routerLink]="['/contents']" routerLinkActive="active">Home</a>
+      <a
+        [routerLink]="['/contents', clienteId, clienteNome]"
+        routerLinkActive="active"
+        >Home</a
+      >
     </li>
     <li *ngIf="authService.isAuthenticated()">
-      <a [routerLink]="['/panier']" routerLinkActive="active">Panier</a>
+      <a
+        [routerLink]="['/panier', clienteId, clienteNome]"
+        routerLinkActive="active"
+        >Panier</a
+      >
     </li>
     <li *ngIf="authService.isAuthenticated()">
-      <a [routerLink]="['/confirm-logout']" routerLinkActive="active">Logout</a>
+      <a
+        [routerLink]="['/confirm-logout', clienteId, clienteNome]"
+        routerLinkActive="active"
+        >Logout</a
+      >
     </li>
   </ul>
 </nav>

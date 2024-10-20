@@ -5,28 +5,33 @@
       [routerLink]="['order-form/replica', replica.id]"
       *ngFor="let replica of repliche"
     >
-      <h4 class="mb-10 replica-name">{{ replica.id }} - {{ replica.data }}</h4>
-      <p><strong>Titolo spettacolo:</strong> {{ replica.spettacolo.titolo }}</p>
+      <h4 class="mb-10 replica-name">
+        {{ replica.id }} -
+        {{ replica.data | date : "dd/MM/yyyy HH:mm" }}
+      </h4>
+      <p>
+        <strong>Titolo spettacolo:</strong> {{ replica.spettacolo?.titolo }}
+      </p>
       <p>
         <strong>Prezzo biglietto unico:</strong>
-        {{ replica.spettacolo.prezzo }}$
+        {{ replica.spettacolo?.prezzo }}$
       </p>
       <p class="mb-10">
         <strong>Total posti disponibili:</strong>
-        {{ replica.spettacolo.teatro.posti }}
+        {{ replica.spettacolo?.teatro?.posti }}
       </p>
 
       <p>
         <strong
-          >{{ replica.spettacolo.teatro.nome }} -
-          {{ replica.spettacolo.teatro.indirizzo }} -
-          {{ replica.spettacolo.teatro.citta }} ({{
-            replica.spettacolo.teatro.provincia
+          >{{ replica.spettacolo?.teatro?.nome }} -
+          {{ replica.spettacolo?.teatro?.indirizzo }} -
+          {{ replica.spettacolo?.teatro?.citta }} ({{
+            replica.spettacolo?.teatro?.provincia
           }})
         </strong>
       </p>
-      <p><strong>Regista:</strong> {{ replica.spettacolo.regista }}</p>
-      <p><strong>Autore:</strong> {{ replica.spettacolo.autore }}</p>
+      <p><strong>Regista:</strong> {{ replica.spettacolo?.regista }}</p>
+      <p><strong>Autore:</strong> {{ replica.spettacolo?.autore }}</p>
     </li>
   </ul>
 </div>

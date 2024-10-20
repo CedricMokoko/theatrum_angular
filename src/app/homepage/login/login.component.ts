@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
       this.clienteService.login$(email, password).subscribe({
         next: (cliente) => {
-          this.authService.login(Number(cliente.id), cliente.nome);
+          this.authService.login(Number(cliente.id), cliente.nome!);
           this.router.navigate(['/contents', cliente.id, cliente.nome]);
         },
         // Messaggi di errori provenienti dal clienteService dopo la sua interazione con il server

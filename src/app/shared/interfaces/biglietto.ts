@@ -3,7 +3,7 @@ import { Replica } from './replica';
 
 export interface Biglietto {
   id?: number;
-  dataOra: Date;
+  dataOra?: Date;
   tipoPagamento: string;
   quantita: number;
   cliente: Cliente; // Relazione ManyToOne con Cliente

@@ -3,100 +3,50 @@
   style="padding-top: 30px"
 >
   <form
+    (ngSubmit)="submit()"
     [formGroup]="orderForm"
     class="formulaire d-flex flex-column flex-align-items-center"
   >
     <div class="d-flex flex-column form-group">
-      <label for="">Codice Operazione <span class="asterisco">*</span></label>
-      <input
-        #nameInput
-        name="name"
-        formControlName="name"
-        type="text"
-        placeholder="cocktail name..."
-      />
-    </div>
-    <div class="d-flex flex-column form-group">
-      <label for="">Codice Cliente <span class="asterisco">*</span></label>
-      <input
-        #nameInput
-        name="name"
-        formControlName="name"
-        type="text"
-        placeholder="cocktail name..."
-      />
+      <label>Codice Cliente <span class="asterisco">*</span></label>
+      <input name="codiceCliente" formControlName="codiceCliente" type="text" />
     </div>
 
     <div class="d-flex flex-column form-group">
-      <label for="">Codice Replica <span class="asterisco">*</span></label>
-      <input
-        #nameInput
-        name="name"
-        formControlName="name"
-        type="text"
-        placeholder="cocktail name..."
-      />
+      <label>Codice Replica <span class="asterisco">*</span></label>
+      <input name="codiceReplica" formControlName="codiceReplica" type="text" />
     </div>
 
     <!-- Radio button -->
     <div class="d-flex flex-column form-group">
-      <label for="">Tipo pagamento</label>
-      <div class="d-flex flex-row">
+      <label>Tipo pagamento</label>
+      <div class="d-flex flex-column">
         <div>
-          <label for="" style="color: #000"
+          <label style="color: #000"
             >Carta di Credito
-            <input formControlName="gender" type="radio" value="male"
+            <input
+              formControlName="tipoPagamento"
+              type="radio"
+              value="cartaDiCredito"
           /></label>
         </div>
         <div>
-          <label for="" style="margin-left: 15px; color: #000"
-            >Bonifico
-            <input formControlName="gender" type="radio" value="female"
+          <label style="color: #000"
+            >PayPal
+            <input
+              formControlName="tipoPagamento"
+              type="radio"
+              value="bonifico"
           /></label>
         </div>
       </div>
     </div>
 
-    <div
-      formArrayName="ingredients"
-      class="d-flex flex-column form-group-ingredients"
-    >
+    <div class="d-flex flex-column form-group">
       <label>Quantità <span class="asterisco">*</span></label>
-      <input
-        class="input-ingredients"
-        formControlName="quantity"
-        name="quantity"
-        type="number"
-        placeholder="quantity..."
-      />
+      <input formControlName="quantita" name="quantita" type="number" />
     </div>
-    <hr class="separator" />
-
-    <!-- routerLink="../" me fait retourner sur la route precedente.
-     [disabled]="cocktailForm.invalid" permet de desactiver le btn si le form n'est pas
-     valide et du coté du css on peut donner un effet visuel en utilisant ":disabled" -->
-    <!-- <div class="d-flex flex-align-content-center actions">
-      <button [disabled]="cocktailForm.invalid" class="btn btn-custom">
-        {{ cocktail ? "Edit" : "Submit" }}
-      </button>
-      <button
-        class="btn btn-custom"
-        type="button"
-        (click)="redirectToCocktailsList()"
-      >
-        Annuler
-      </button>
-      <button (click)="addIngredient()" type="button" class="btn btn-custom">
-        + ingredients
-      </button>
-      <button
-        *ngIf="cocktail"
-        (click)="delete()"
-        type="button"
-        class="btn btn-custom"
-      >
-        Delete
-      </button> -->
-    <!-- </div> -->
+    <div class="separator"></div>
+    <button class="btn btn-primary mb-5 mt-10">Acquista</button>
   </form>
 </div>

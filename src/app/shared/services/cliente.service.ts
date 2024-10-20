@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from '../interfaces/cliente';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClienteService {
+  public cliente$: BehaviorSubject<Cliente | null> =
+    new BehaviorSubject<Cliente | null>(null);
+
   private apiBaseUrl: string = 'http://localhost:8081/api/clienti';
 
   constructor(private http: HttpClient) {}
@@ -20,7 +23,12 @@ export class ClienteService {
     };
     return this.http
       .post<Cliente>(`${this.apiBaseUrl}/login`, loginRequest)
-      .pipe(catchError(this.handleError('login')));
+      .pipe(
+        tap((cliente: Cliente) => {
+          this.cliente$.next(cliente);
+        }),
+        catchError(this.handleError('login'))
+      );
   }
 
   // Metodo per registrare un nuovo utente

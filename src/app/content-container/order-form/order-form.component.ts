@@ -14,7 +14,13 @@ import { Biglietto } from '../../shared/interfaces/biglietto';
 export class OrderFormComponent implements OnInit, OnDestroy {
   public orderForm!: FormGroup;
   public clienteId!: string;
+  public clienteNome!: string;
   public replicaId!: string;
+  public teatroId!: string;
+  public teatroNome!: string;
+  public spettacoloId!: string;
+  public spettacoloTitolo!: string;
+
   private subscription!: Subscription;
 
   constructor(
@@ -36,6 +42,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
     // Recupera l'ID del cliente dal AuthService
     this.clienteId = this.authService.getClienteId()?.toString()!; // Recupera e converte in stringa
+    this.clienteNome = this.authService.getClienteNome()!; // Recupera e converte in stringa
 
     // Popolare il campo del form con l'ID del cliente
     if (this.clienteId) {
@@ -44,8 +51,19 @@ export class OrderFormComponent implements OnInit, OnDestroy {
       });
     }
 
-    //Parametro clienteId dalla route
+    //Parametro recupero i parametri dall'url
+
+    this.teatroId = this.activatedRoute.snapshot.paramMap.get('teatro_id')!;
+    this.teatroNome = this.activatedRoute.snapshot.paramMap.get('teatro_nome')!;
+    this.spettacoloId =
+      this.activatedRoute.snapshot.paramMap.get('spettacolo_id')!;
+    this.spettacoloTitolo =
+      this.activatedRoute.snapshot.paramMap.get('spettacolo_titolo')!;
     this.replicaId = this.activatedRoute.snapshot.paramMap.get('replica_id')!;
+    // // this.clienteId = this.activatedRoute.snapshot.paramMap.get('cliente_id')!;
+    // // this.clienteNome =
+    // //   this.activatedRoute.snapshot.paramMap.get('cliente_nome')!;
+
     if (this.replicaId) {
       // Popolare i campi del form con i dati del cliente
       this.orderForm.patchValue({
@@ -69,7 +87,22 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (biglietto) => {
             console.log('Ticket created:', biglietto);
-            this.router.navigate(['/success']); // Redirect to a success page after submission
+            this.router.navigate([
+              'contents',
+              this.clienteId,
+              this.clienteNome,
+              'teatro',
+              this.teatroId,
+              this.teatroNome,
+              'spettacolo',
+              this.spettacoloId,
+              this.spettacoloTitolo,
+              'repliche-list',
+              'order-form',
+              'replica',
+              this.replicaId,
+              'order-success',
+            ]); // Redirect to a success page after submission
           },
         });
     } else {

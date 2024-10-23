@@ -12,7 +12,13 @@ export class ClienteService {
 
   private apiBaseUrl: string = 'http://localhost:8081/api/clienti';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Recupera il cliente da localStorage (se presente)
+    const storedCliente = localStorage.getItem('cliente');
+    if (storedCliente) {
+      this.cliente$.next(JSON.parse(storedCliente)); // Ripristina il cliente nel BehaviorSubject
+    }
+  }
 
   // Metodo per il login
   public login$(email: string, password: string): Observable<Cliente> {
@@ -25,7 +31,10 @@ export class ClienteService {
       .post<Cliente>(`${this.apiBaseUrl}/login`, loginRequest)
       .pipe(
         tap((cliente: Cliente) => {
+          // Salva il cliente nel BehaviorSubject
           this.cliente$.next(cliente);
+          // Salva il cliente in localStorage
+          localStorage.setItem('cliente', JSON.stringify(cliente));
         }),
         catchError(this.handleError('login'))
       );
@@ -64,5 +73,13 @@ export class ClienteService {
       }
       return throwError(() => new Error(errorMessage));
     };
+  }
+
+  //Pulisce sia il BehaviorSubject, sia il localStorage
+  public logout(): void {
+    // Pulisce il cliente dal BehaviorSubject
+    this.cliente$.next(null);
+    // Rimuove il cliente da localStorage
+    localStorage.removeItem('cliente');
   }
 }

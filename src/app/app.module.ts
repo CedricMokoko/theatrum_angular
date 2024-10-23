@@ -22,6 +22,7 @@ import { PanierComponent } from './panier/panier.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegistrationSuccessComponent } from './homepage/registration-success/registration-success.component';
 import { ConfirmLogoutComponent } from './content-container/confirm-logout/confirm-logout.component';
+import { OrderSuccessComponent } from './content-container/order-success/order-success.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ConfirmLogoutComponent } from './content-container/confirm-logout/confi
     NotFoundComponent,
     RegistrationSuccessComponent,
     ConfirmLogoutComponent,
+    OrderSuccessComponent,
   ],
   imports: [
     BrowserModule,

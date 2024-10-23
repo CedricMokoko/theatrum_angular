@@ -1,4 +1,50 @@
 <div class="theatrum-container d-flex flex-column">
   <!-- <h3 class="panier-title">Carello</h3> -->
-  <div class=""></div>
+  <div class="panier-container">
+    <h2 class="mb-10 mt-10">I tuoi Biglietti</h2>
+
+    <div *ngIf="biglietti && biglietti.length > 0; else noBiglietti">
+      <div *ngFor="let biglietto of biglietti" class="biglietto-card mb-20">
+        <h3>Biglietto #{{ biglietto.id }}</h3>
+        <p>
+          <strong>Data Acquisto:</strong>
+          {{ biglietto.dataOra | date : "dd/MM/yyyy" }}
+        </p>
+
+        <p>
+          <strong>Nome e Cognome:</strong> {{ biglietto.cliente.nome }}
+          {{ biglietto.cliente.cognome }}
+        </p>
+        <p><strong>Tipo pagamento:</strong> {{ biglietto.tipoPagamento }}</p>
+        <p>
+          <strong>Quantità di biglietti richiesta:</strong>
+          {{ biglietto.quantita }}
+        </p>
+
+        <p>
+          <strong>Data dello spettacolo:</strong>
+          {{ biglietto.replica.data | date : "dd/MM/yyyy" }}
+        </p>
+        <p>
+          <strong>Nome Spettacolo:</strong>
+          {{ biglietto.replica.spettacolo?.titolo }}
+        </p>
+        <p>
+          <strong>Regista:</strong> {{ biglietto.replica.spettacolo?.regista }}
+        </p>
+        <p>
+          <strong>Autore:</strong> {{ biglietto.replica.spettacolo?.autore }}
+        </p>
+
+        <p>
+          <strong>Nome del teatro:</strong>
+          {{ biglietto.replica.spettacolo?.teatro?.nome }}
+        </p>
+      </div>
+    </div>
+
+    <ng-template #noBiglietti>
+      <p class="error-text">Non hai biglietti disponibili.</p>
+    </ng-template>
+  </div>
 </div>

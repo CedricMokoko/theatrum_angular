@@ -20,6 +20,7 @@ import { RegistrationSuccessComponent } from './homepage/registration-success/re
 // Guards
 import { authGuard } from './shared/auth/auth.guard';
 import { signoutGuard } from './shared/auth/signout.guard';
+import { OrderSuccessComponent } from './content-container/order-success/order-success.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
       {
         path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:replica_id',
         component: OrderFormComponent,
+      },
+      {
+        path: 'teatro/:teatro_id/:teatro_nome/spettacolo/:spettacolo_id/:spettacolo_titolo/repliche-list/order-form/replica/:replica_id/order-success',
+        component: OrderSuccessComponent,
       },
     ],
   },

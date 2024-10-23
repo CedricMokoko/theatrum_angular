@@ -40,6 +40,20 @@ export class ReplicaService {
       );
   }
 
+  // Metodo per ottenere una replica singola tramite replica_id
+  public getReplicaByReplicaId$(replica_id: string): Observable<Replica> {
+    return this.http
+      .get<Replica>(`${this.apiBaseUrl}/id/${replica_id}`) // URL endpoint per ottenere la singola replica
+      .pipe(
+        shareReplay(1), // Cache l'ultimo valore per i successivi subscribers
+        catchError((error) => {
+          return throwError(
+            () => new Error('Errore durante il recupero della replica')
+          );
+        })
+      );
+  }
+
   /**
    * Metodo per resettare lo stato degli spettacoli.
    * Utilizzabile, ad esempio, quando si cambia il teatro.

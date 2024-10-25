@@ -5,6 +5,7 @@ import { BigliettoService } from '../shared/services/biglietto.service';
 import { ClienteService } from '../shared/services/cliente.service';
 import { Replica } from '../shared/interfaces/replica';
 import { ReplicaService } from '../shared/services/replica.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-panier',
@@ -20,12 +21,12 @@ export class PanierComponent implements OnInit, OnDestroy {
 
   constructor(
     private bigliettoService: BigliettoService,
-    private clienteService: ClienteService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     // Recupera il valore attuale del cliente dal BehaviorSubject
-    const currentCliente = this.clienteService.cliente$.getValue();
+    const currentCliente = this.authService.cliente$.getValue();
 
     if (currentCliente) {
       // Se il cliente è presente, assegna il clienteId

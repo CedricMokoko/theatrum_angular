@@ -23,7 +23,7 @@ export class SpettacoliListComponent implements OnInit, OnDestroy {
     const sub1 = this.activatedRoute.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
-          const teatro_id = params.get('teatro_id'); // Controlla il parametro
+          const teatro_id = params.get('teatro_id'); // Recupera il parametro dall'URL
           if (teatro_id) {
             return this.spettacoloService.getSpettacolibyTeatriId$(teatro_id);
           }

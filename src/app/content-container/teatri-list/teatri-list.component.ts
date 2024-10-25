@@ -3,6 +3,7 @@ import { Teatro } from '../../shared/interfaces/teatro';
 import { TeatroService } from '../../shared/services/teatro.service';
 import { SpettacoloService } from '../../shared/services/spettacolo.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-teatri-list',
@@ -11,27 +12,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TeatriListComponent implements OnInit {
   public teatri?: Teatro[];
-  public clienteId!: string;
-  public clienteNome!: string;
+  public clienteId!: number | null;
+  public clienteNome!: string | null | undefined;
 
   constructor(
     private teatroService: TeatroService,
-    private spettacoloService: SpettacoloService,
-    private activatedRoute: ActivatedRoute
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    // Ottieni l'ID e il nome del cliente dalla route
-    this.clienteId = this.activatedRoute.snapshot.paramMap.get('cliente_id')!;
-    this.clienteNome =
-      this.activatedRoute.snapshot.paramMap.get('cliente_nome')!;
-    //-------
+    // Recupero l'Id e il nome dell'utente grazie ai getters definiti nella classe "AuthService"
+    this.clienteId = this.authService.getClienteId();
+    this.clienteNome = this.authService.getClienteNome();
+
+    // Recupero la lista dei teatri dall'BehaviorSubject "teatri$""
     this.teatroService.teatri$.subscribe((teatri$) => {
       this.teatri = teatri$;
     });
   }
-
-  // public getSpettacoliByTeatroId(teatro_id) {
-
-  // }
 }

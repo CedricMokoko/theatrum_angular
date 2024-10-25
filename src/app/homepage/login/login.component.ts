@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
-import { Subscription, tap } from 'rxjs';
-import { ClienteService } from '../../shared/services/cliente.service';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 
@@ -27,11 +26,7 @@ export class LoginComponent implements OnInit {
     },
   };
 
-  constructor(
-    private clienteService: ClienteService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   public subscription: Subscription = new Subscription();
 
@@ -63,12 +58,12 @@ export class LoginComponent implements OnInit {
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
 
-      this.clienteService.login$(email, password).subscribe({
+      this.authService.login$(email, password).subscribe({
         next: (cliente) => {
-          this.authService.login(Number(cliente.id), cliente.nome!);
+          this.authService.setToken(Number(cliente.id), cliente.nome!);
           this.router.navigate(['/contents', cliente.id, cliente.nome]);
         },
-        // Messaggi di errori provenienti dal clienteService dopo la sua interazione con il server
+        // Messaggi di errori provenienti dall' authService dopo la sua interazione con il server
         error: (error) => {
           this.formErrors['form'].message = error.message;
         },

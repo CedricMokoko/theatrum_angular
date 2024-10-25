@@ -27,12 +27,13 @@ export class BigliettoService {
     return this.http.post<Biglietto>(`${this.apiBaseUrl}`, biglietto);
   }
 
+  // Metodo per recuperare i biglietti in base all'Id dell'utente
   public getBigliettiByClienteId$(cliente_id: number): Observable<Biglietto[]> {
     return this.http
       .get<Biglietto[]>(`${this.apiBaseUrl}/cliente/${cliente_id}`)
       .pipe(
         tap((biglietti: Biglietto[]) => {
-          this.biglietti$.next(biglietti);
+          this.biglietti$.next(biglietti); // Aggiorno il mio BehaviorSubject "biglietti$"
         }),
         shareReplay(1), // Cache l'ultimo valore per i successivi subscribers
         catchError((error) => {

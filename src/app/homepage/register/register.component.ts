@@ -3,9 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
 import { FormErrorHandlerService } from '../../shared/services/form-error-handler.service';
 import { passwordMatchValidator } from '../../shared/validators/passwordmatch.validator';
-import { ClienteService } from '../../shared/services/cliente.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -70,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formErrorHandler: FormErrorHandlerService,
-    private clienteService: ClienteService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -116,7 +115,7 @@ export class RegisterComponent implements OnInit {
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
 
-      this.clienteService.register$(cognome, nome, email, password).subscribe({
+      this.authService.register$(cognome, nome, email, password).subscribe({
         next: (cliente) => {
           this.form.reset();
           this.router.navigate(['/register-success']);

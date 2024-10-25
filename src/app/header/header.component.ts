@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public clienteId!: string | null;
-  public clienteNome!: string | null;
+  public clienteNome!: string | null | undefined;
 
   constructor(
     public authService: AuthService,

@@ -7,12 +7,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class TeatroService {
+  // Ici come valeur de default on passe un tableau vite BehaviorSubject
   public teatri$: BehaviorSubject<Teatro[]> = new BehaviorSubject<Teatro[]>([]);
 
   private apiBaseUrl: string = 'http://localhost:8081/api/teatri';
 
   constructor(private http: HttpClient) {}
 
+  // Metodo per caricare tutti i teatri salvati nel database.
   public fetchTeatri$(): Observable<Teatro[]> {
     return this.http.get<Teatro[]>(this.apiBaseUrl).pipe(
       tap((teatri: Teatro[]) => {

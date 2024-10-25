@@ -1,1 +1,18 @@
-<p>order-success works!</p>
+<div
+  class="theatrum-container d-flex flex-row flex-justify-content-center flex-align-items-center"
+>
+  <div class="message-content">
+    <p class="intro-text">La tua prenotazione è andata a buon fine.</p>
+    <div class="btn-container">
+      <li
+        class="lista d-flex flex-row flex-align-items-center flex-justify-content-center"
+      >
+        <a
+          class="btn btn-primary"
+          [routerLink]="['/contents', clienteId, clienteNome]"
+          >ok</a
+        >
+      </li>
+    </div>
+  </div>
+</div>

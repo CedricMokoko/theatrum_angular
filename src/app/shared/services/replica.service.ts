@@ -14,6 +14,7 @@ import {
   providedIn: 'root',
 })
 export class ReplicaService {
+  // Ici come valeur de default on passe un tableau vite BehaviorSubject
   public repliche$: BehaviorSubject<Replica[]> = new BehaviorSubject<Replica[]>(
     []
   );
@@ -22,6 +23,7 @@ export class ReplicaService {
 
   constructor(private http: HttpClient) {}
 
+  // Metodo per ottenere tutte le repliche associate ad un determinato spettacolo
   public getReplicheBySpettacoliId$(
     spettacolo_id: string
   ): Observable<Replica[]> {
@@ -40,21 +42,19 @@ export class ReplicaService {
       );
   }
 
-  // Metodo per ottenere una replica singola tramite replica_id
+  // Metodo per ottenere una singola replica tramite replica_id
   public getReplicaByReplicaId$(replica_id: string): Observable<Replica> {
-    return this.http
-      .get<Replica>(`${this.apiBaseUrl}/id/${replica_id}`) // URL endpoint per ottenere la singola replica
-      .pipe(
-        shareReplay(1), // Cache l'ultimo valore per i successivi subscribers
-        catchError((error) => {
-          return throwError(
-            () => new Error('Errore durante il recupero della replica')
-          );
-        })
-      );
+    return this.http.get<Replica>(`${this.apiBaseUrl}/id/${replica_id}`).pipe(
+      shareReplay(1), // Cache l'ultimo valore per i successivi subscribers
+      catchError((error) => {
+        return throwError(
+          () => new Error('Errore durante il recupero della replica')
+        );
+      })
+    );
   }
 
-  /**
+  /*
    * Metodo per resettare lo stato degli spettacoli.
    * Utilizzabile, ad esempio, quando si cambia il teatro.
    */

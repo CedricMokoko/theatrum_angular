@@ -14,6 +14,7 @@ import { Spettacolo } from '../interfaces/spettacolo';
   providedIn: 'root',
 })
 export class SpettacoloService {
+  // Ici come valeur de default on passe un tableau vite BehaviorSubject
   public spettacoli$: BehaviorSubject<Spettacolo[]> = new BehaviorSubject<
     Spettacolo[]
   >([]);
@@ -22,6 +23,7 @@ export class SpettacoloService {
 
   constructor(private http: HttpClient) {}
 
+  // Metodo per ottenere tutti gli spettacoli associati ad un determinato teatro
   public getSpettacolibyTeatriId$(teatro_id: string): Observable<Spettacolo[]> {
     return this.http
       .get<Spettacolo[]>(`${this.apiBaseUrl}/teatro/${teatro_id}`)
@@ -38,7 +40,7 @@ export class SpettacoloService {
       );
   }
 
-  /**
+  /*
    * Metodo per resettare lo stato degli spettacoli.
    * Utilizzabile, ad esempio, quando si cambia il teatro.
    */

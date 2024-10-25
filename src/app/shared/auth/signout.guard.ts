@@ -8,7 +8,9 @@ export const signoutGuard: CanActivateFn = (route, state) => {
 
   if (authService.isAuthenticated()) {
     // blocca l'accesso alla route richiesta e redirige su /contents se l'utente risulta connesso.
-    router.navigate(['/contents']);
+    const clienteId = authService.getClienteId();
+    const clientNome = authService.getClienteNome();
+    router.navigate(['/contents', clienteId, clientNome]);
     return false;
   } else {
     // consente la navigazione verso route richiesta se l'utente risulta non connesso.

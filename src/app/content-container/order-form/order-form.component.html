@@ -44,6 +44,25 @@
       <input formControlName="quantita" name="quantita" type="number" />
     </div>
     <div class="separator"></div>
-    <button class="btn btn-primary mb-5 mt-10">Acquista</button>
+    <div class="btn-content d-flex">
+      <button class="btn btn-primary mb-5 mt-10">Acquista</button>
+      <button
+        [routerLink]="[
+          '/contents',
+          clienteId,
+          clienteNome,
+          'teatro',
+          teatroId,
+          teatroNome,
+          'spettacolo',
+          spettacoloId,
+          spettacoloTitolo,
+          'repliche-list'
+        ]"
+        class="btn btn-primary mb-5 mt-10"
+      >
+        Annulla
+      </button>
+    </div>
   </form>
 </div>

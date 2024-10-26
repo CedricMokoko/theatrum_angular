@@ -1,6 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+// Importa icone solide da '@fortawesome/free-solid-svg-icons'
+import {
+  faHome,
+  faShoppingCart,
+  faSignInAlt,
+  faSignOutAlt,
+  faCheckCircle, // Icona per il successo dell'ordine
+  faUserPlus, // Icona per registrazione
+  faLock, // Icona per password
+  faUser, // Icona per nome utente
+} from '@fortawesome/free-solid-svg-icons';
+
+// Importa icone regolari da '@fortawesome/free-regular-svg-icons'
+import { faEnvelope, faCopyright } from '@fortawesome/free-regular-svg-icons';
+
+// Importa icone di brand da '@fortawesome/free-brands-svg-icons'
+import {
+  faLinkedin,
+  faGithub,
+  faInstagram,
+} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +29,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
+  // Icons
+  // Icone solide
+  faHome = faHome;
+  faShoppingCart = faShoppingCart;
+  faSignInAlt = faSignInAlt;
+  faSignOutAlt = faSignOutAlt;
+  faCheckCircle = faCheckCircle; // Icona per il successo dell'ordine
+  faUserPlus = faUserPlus; // Icona per registrazione
+  faLock = faLock; // Icona per password
+  faUser = faUser; // Icona per nome utente
+
+  // Icone regolari
+  faEnvelope = faEnvelope;
+  faCopyright = faCopyright;
+
+  // Icone di brand
+  faLinkedin = faLinkedin;
+  faGithub = faGithub;
+  faInstagram = faInstagram;
+
   public clienteId!: string | null;
   public clienteNome!: string | null | undefined;
 
-  constructor(
-    public authService: AuthService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.checkAuthentication();

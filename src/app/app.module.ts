@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Components
 import { AppComponent } from './app.component';
@@ -43,15 +47,15 @@ import { OrderSuccessComponent } from './content-container/order-success/order-s
     ConfirmLogoutComponent,
     OrderSuccessComponent,
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
+    FontAwesomeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

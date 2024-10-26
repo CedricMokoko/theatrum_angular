@@ -13,10 +13,14 @@
 
   <ul class="d-flex">
     <li *ngIf="!authService.isAuthenticated()">
-      <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+      <a [routerLink]="['/login']" routerLinkActive="active"
+        >Login <fa-icon [icon]="faSignInAlt"></fa-icon
+      ></a>
     </li>
     <li *ngIf="!authService.isAuthenticated()">
-      <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
+      <a [routerLink]="['/register']" routerLinkActive="active"
+        >Register <fa-icon [icon]="faUserPlus"></fa-icon
+      ></a>
     </li>
     <!-- <li *ngIf="!authService.isAuthenticated()"> -->
     <!-- <a>About us</a> -->

@@ -6,6 +6,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { BigliettoService } from '../../shared/services/biglietto.service';
 import { Biglietto } from '../../shared/interfaces/biglietto';
 import { TeatroService } from '../../shared/services/teatro.service';
+import { ReplicaService } from '../../shared/services/replica.service';
 
 @Component({
   selector: 'app-order-form',
@@ -31,6 +32,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private bigliettoService: BigliettoService,
+    private replicaService: ReplicaService,
     private teatroService: TeatroService,
     private router: Router
   ) {}
@@ -73,13 +75,22 @@ export class OrderFormComponent implements OnInit, OnDestroy {
       this.orderForm.patchValue({
         codiceReplica: this.replicaId, // Usa l'ID del cliente
       });
+
+      // Fetch replicche details to get available seats
+      this.replicaService.getReplicaByReplicaId$(this.replicaId).subscribe({
+        next: (replica) => {
+          this.postiDisponibili = replica.postiDisponibili || 0; // Set available seats
+        },
+        error: (error) => {
+          console.error('Error fetching replica details:', error); // Handle error
+        },
+      });
     }
 
-    // Fetch theater details to get available seats
     if (this.teatroId) {
+      // Fetch teatro details to get available seats
       this.teatroService.getTeatroById(this.teatroId).subscribe({
         next: (teatro) => {
-          this.postiDisponibili = teatro.postiDisponibili || 0; // Set available seats
           this.posti = teatro.posti || 0; // Set available seats
         },
         error: (error) => {
@@ -98,12 +109,12 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         cliente: { id: Number(this.clienteId) }, // Create Cliente object
         replica: {
           id: this.replicaId,
+          postiDisponibili: Number(this.postiDisponibili),
           spettacolo: {
             id: this.spettacoloId,
             teatro: {
               id: this.teatroId,
               posti: this.posti,
-              postiDisponibili: this.postiDisponibili,
             },
           },
         }, // Create Replica object

@@ -6,5 +6,4 @@ export interface Teatro {
   provincia?: string;
   telefono?: string;
   posti?: number;
-  postiDisponibili?: number;
 }

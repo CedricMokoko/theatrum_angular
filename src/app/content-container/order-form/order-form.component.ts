@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { BigliettoService } from '../../shared/services/biglietto.service';
 import { Biglietto } from '../../shared/interfaces/biglietto';
+import { TeatroService } from '../../shared/services/teatro.service';
 
 @Component({
   selector: 'app-order-form',
@@ -20,6 +21,8 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   public teatroNome!: string;
   public spettacoloId!: string;
   public spettacoloTitolo!: string;
+  public postiDisponibili!: number; // Aggiungi una proprietà per i posti disponibili
+  public posti!: number; // Aggiungi una proprietà per i posti
 
   private subscription!: Subscription;
 
@@ -28,6 +31,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private bigliettoService: BigliettoService,
+    private teatroService: TeatroService,
     private router: Router
   ) {}
 
@@ -70,6 +74,19 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         codiceReplica: this.replicaId, // Usa l'ID del cliente
       });
     }
+
+    // Fetch theater details to get available seats
+    if (this.teatroId) {
+      this.teatroService.getTeatroById(this.teatroId).subscribe({
+        next: (teatro) => {
+          this.postiDisponibili = teatro.postiDisponibili || 0; // Set available seats
+          this.posti = teatro.posti || 0; // Set available seats
+        },
+        error: (error) => {
+          console.error('Error fetching theater details:', error); // Handle error
+        },
+      });
+    }
   }
 
   public submit(): void {
@@ -79,8 +96,20 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         tipoPagamento: this.orderForm.get('tipoPagamento')?.value,
         quantita: this.orderForm.get('quantita')?.value,
         cliente: { id: Number(this.clienteId) }, // Create Cliente object
-        replica: { id: this.replicaId }, // Create Replica object
+        replica: {
+          id: this.replicaId,
+          spettacolo: {
+            id: this.spettacoloId,
+            teatro: {
+              id: this.teatroId,
+              posti: this.posti,
+              postiDisponibili: this.postiDisponibili,
+            },
+          },
+        }, // Create Replica object
       };
+
+      console.log('Submitting Biglietto:', newBiglietto); // Log i dati inviati
 
       this.subscription = this.bigliettoService
         .createBiglietto(newBiglietto)

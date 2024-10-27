@@ -37,9 +37,6 @@ export class PanierComponent implements OnInit, OnDestroy {
         .getBigliettiByClienteId$(Number(this.clienteId))
         .subscribe((biglietti: Biglietto[]) => {
           this.biglietti = biglietti;
-
-          // Stampa i biglietti recuperati nella console
-          console.log('Biglietti recuperati:', this.biglietti);
         });
 
       // Aggiungi la subscription all'elenco di subscription
@@ -47,6 +44,18 @@ export class PanierComponent implements OnInit, OnDestroy {
     } else {
       console.log('Cliente non trovato.');
     }
+  }
+
+  public getSortedBiglietti(): Biglietto[] | undefined {
+    if (this.biglietti) {
+      // Ritorna i biglietti ordinati per data della replica in ordine decrescente
+      return [...this.biglietti].sort(
+        (a, b) =>
+          new Date(a.replica.data!).getTime() -
+          new Date(b.replica.data!).getTime()
+      );
+    }
+    return undefined;
   }
 
   ngOnDestroy(): void {

@@ -22,4 +22,9 @@ export class TeatroService {
       })
     );
   }
+
+  // Metodo per caricare un teatro specifico per ID.
+  public getTeatroById(teatroId: string): Observable<Teatro> {
+    return this.http.get<Teatro>(`${this.apiBaseUrl}/id/${teatroId}`);
+  }
 }

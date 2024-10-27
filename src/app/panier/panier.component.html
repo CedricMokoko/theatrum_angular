@@ -4,8 +4,15 @@
     <h2 class="mb-10 mt-10">I tuoi Biglietti</h2>
 
     <div *ngIf="biglietti && biglietti.length > 0; else noBiglietti">
-      <div *ngFor="let biglietto of biglietti" class="biglietto-card mb-20">
-        <h3>Biglietto #{{ biglietto.id }}</h3>
+      <div
+        *ngFor="let biglietto of getSortedBiglietti()"
+        class="biglietto-card mb-20"
+      >
+        <h3>Biglietto #{{ biglietto.codOperazione }}</h3>
+        <p>
+          <strong>Data dello spettacolo:</strong>
+          {{ biglietto.replica.data | date : "dd/MM/yyyy" }}
+        </p>
         <p>
           <strong>Data Acquisto:</strong>
           {{ biglietto.dataOra | date : "dd/MM/yyyy" }}
@@ -21,10 +28,6 @@
           {{ biglietto.quantita }}
         </p>
 
-        <p>
-          <strong>Data dello spettacolo:</strong>
-          {{ biglietto.replica.data | date : "dd/MM/yyyy" }}
-        </p>
         <p>
           <strong>Nome Spettacolo:</strong>
           {{ biglietto.replica.spettacolo?.titolo }}

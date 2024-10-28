@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
         next: (cliente) => {
           this.authService.setToken(Number(cliente.id), cliente.nome!);
           this.router.navigate(['/contents', cliente.id, cliente.nome]);
+
+          console.log('cliente -> ', cliente);
         },
         // Messaggi di errori provenienti dall' authService dopo la sua interazione con il server
         error: (error) => {

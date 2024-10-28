@@ -1,3 +1,5 @@
+import { Rating } from './rating';
+
 export interface Teatro {
   id: string;
   nome?: string;
@@ -5,5 +7,7 @@ export interface Teatro {
   citta?: string;
   provincia?: string;
   telefono?: string;
+  imageUrl?: string;
   posti?: number;
+  ratings?: Rating[]; // Relazione OneToMany con Rating
 }
